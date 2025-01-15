@@ -5,19 +5,6 @@ GO
 CREATE SCHEMA Parson
 GO
 
--- ACCOUNT TABLE
-CREATE TABLE Parson.Account
-(
-    Id INT IDENTITY,
-    Username VARCHAR(50) NOT NULL,
-    [Password] VARCHAR(20) NOT NULL,
-    [Role] CHAR(7) NOT NULL,
-    CONSTRAINT PK_Account_Id PRIMARY KEY(Id),
-    CONSTRAINT UQ_Account_Username UNIQUE (Username),
-    CONSTRAINT CK_Account_Password CHECK(LEN([Password]) >= 8 AND LEN([Password]) <= 20),
-	CONSTRAINT CK_Account_Role CHECK(UPPER([Role]) IN ('ADMIN', 'INSTRUCTOR','TRAINING MANAGER','STUDENT'))
-) ON ExaminationSystemDB_FG2;
-GO
 
 -- INSTRUCTOR TABLE
 CREATE TABLE Parson.Instructor 
@@ -36,7 +23,6 @@ CREATE TABLE Parson.Instructor
     CONSTRAINT PK_Instructor_SSN PRIMARY KEY (SSN),
     CONSTRAINT CK_Instructor_SSN CHECK (LEN(SSN) = 14),
     CONSTRAINT CK_Instructor_Gender CHECK(UPPER(Gender) IN ('M', 'F')),
-    CONSTRAINT FK_Instructor_AccountId FOREIGN KEY (AccountId) REFERENCES Parson.Account(Id) ON UPDATE CASCADE,
     CONSTRAINT FK_Instructor_BranchId FOREIGN KEY (BranchId) REFERENCES Organization.Branch(Id) ON UPDATE CASCADE ON DELETE SET NULL
 ) ON ExaminationSystemDB_FG2;
 GO
@@ -64,7 +50,6 @@ CREATE TABLE Parson.Student
     CONSTRAINT PK_Student_SSN PRIMARY KEY (SSN),
     CONSTRAINT CK_Student_SSN CHECK (LEN(SSN) = 14),
     CONSTRAINT CK_Student_Gender CHECK(UPPER(Gender) IN ('M', 'F')),
-    CONSTRAINT FK_Student_AccountId FOREIGN KEY (AccountId) REFERENCES Parson.Account(Id) ON UPDATE CASCADE
 ) ON ExaminationSystemDB_FG2;
 GO
 
