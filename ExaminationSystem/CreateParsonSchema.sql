@@ -45,7 +45,6 @@ CREATE TABLE Parson.Student
     Phone CHAR(11) NOT NULL,
     Age AS DATEDIFF(YEAR, BirthDate, GETDATE()),
     [Address] VARCHAR(20) NOT NULL,
-    AccountId INT,
     CONSTRAINT PK_Student_SSN PRIMARY KEY (SSN),
     CONSTRAINT CK_Student_SSN CHECK (LEN(SSN) = 14),
     CONSTRAINT CK_Student_Gender CHECK(UPPER(Gender) IN ('M', 'F')),
