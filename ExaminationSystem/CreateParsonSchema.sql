@@ -17,7 +17,6 @@ CREATE TABLE Parson.Instructor
     Age AS DATEDIFF(YEAR, BirthDate, GETDATE()),
     Phone CHAR(11) NOT NULL,
     [Address] VARCHAR(20) NOT NULL,
-    AccountId INT,
     BranchId INT,
     IsManager BIT CONSTRAINT DF_Instructor_IsManager DEFAULT 0 NOT NULL,
     CONSTRAINT PK_Instructor_SSN PRIMARY KEY (SSN),
