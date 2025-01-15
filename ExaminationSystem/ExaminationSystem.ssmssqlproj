@@ -52,6 +52,24 @@
           <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
           <FullPath>CreateParsonSchema.sql</FullPath>
         </FileNode>
+        <FileNode Name="CreateOrganizationSchema.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
+          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <FullPath>CreateOrganizationSchema.sql</FullPath>
+        </FileNode>
+        <FileNode Name="CreateExamSchema.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
+          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <FullPath>CreateExamSchema.sql</FullPath>
+        </FileNode>
+        <FileNode Name="CreateAnswerSchema.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
+          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <FullPath>CreateAnswerSchema.sql</FullPath>
+        </FileNode>
       </Items>
     </LogicalFolder>
     <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
