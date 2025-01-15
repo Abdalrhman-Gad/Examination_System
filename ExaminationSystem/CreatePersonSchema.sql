@@ -2,12 +2,12 @@ USE [ExaminationSystemDB]
 GO
 
 -- Create schema
-CREATE SCHEMA person
+CREATE SCHEMA Person
 GO
 
 
 -- INSTRUCTOR TABLE
-CREATE TABLE person.Instructor 
+CREATE TABLE Person.Instructor 
 (
     SSN CHAR(14),
     Name VARCHAR(50) NOT NULL,
@@ -32,11 +32,11 @@ AS @Phone LIKE '01[0125][0-9]%%%%%%%%';
 GO
 
 -- Bind rule to phone column in Instructor
-SP_BINDRULE Phone_Rule, 'person.Instructor.Phone';
+SP_BINDRULE Phone_Rule, 'Person.Instructor.Phone';
 GO
 
 -- STUDENT TABLE
-CREATE TABLE person.Student 
+CREATE TABLE Person.Student 
 (
     SSN CHAR(14),
     FullName VARCHAR(50) NOT NULL,
@@ -52,5 +52,5 @@ CREATE TABLE person.Student
 GO
 
 -- Bind rule to phone column in Student
-SP_BINDRULE Phone_Rule, 'person.Student.Phone';
+SP_BINDRULE Phone_Rule, 'Person.Student.Phone';
 GO

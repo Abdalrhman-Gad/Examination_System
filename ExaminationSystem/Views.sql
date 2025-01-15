@@ -55,7 +55,7 @@ CREATE VIEW Organization.V_Branche_Department_Track_Intake_Students
 WITH ENCRYPTION
 AS
 	SELECT VBDTI.*,S.*
-	FROM Parson.Student AS S
+	FROM Person.Student AS S
 	JOIN Organization.Branch_Department_Track_Intake_Student AS BDTIS
 	ON BDTIS.Student_SSN=S.SSN
 	JOIN Organization.Branch_Department_Track_Intake AS BDTI
@@ -70,7 +70,7 @@ SELECT * FROM Organization.V_Branche_Department_Track_Intake_Students
 CREATE VIEW Organization.Branch_Department_Track_Intake_Instructor_Course
 WITH ENCRYPTION 
 	SELECT VBDTI.*,I.*,C.*
-	FROM [Parson].[Instructor] AS I
+	FROM [Person].[Instructor] AS I
 	JOIN [Organization].[Instructor_Course] AS IC
 	ON I.SSN=IC.Instructor_SSN
 	JOIN [Organization].[Course] AS C

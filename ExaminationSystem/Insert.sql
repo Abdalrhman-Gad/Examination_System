@@ -89,7 +89,7 @@ INSERT INTO Organization.Branch_Department_Track_Intake (Branch_Department_Track
 (10, 10);
 GO
 
-INSERT INTO Parson.Student (SSN, FullName, Gender, BirthDate, Phone, [Address]) VALUES
+INSERT INTO Person.Student (SSN, FullName, Gender, BirthDate, Phone, [Address]) VALUES
 ('30001234567890', 'Ahmed Ali', 'M', '2000-01-01', '01012345678', 'Cairo'),
 ('30001234567891', 'Sara Mohamed', 'F', '1999-05-15', '01112345678', 'Giza'),
 ('30001234567892', 'Omar Hassan', 'M', '2001-03-20', '01212345678', 'Alexandria'),
@@ -102,7 +102,7 @@ INSERT INTO Parson.Student (SSN, FullName, Gender, BirthDate, Phone, [Address]) 
 ('30001234567899', 'Salma Yehia', 'F', '1999-07-14', '01187654321', 'Sohag');
 GO
 
-INSERT INTO Parson.Instructor (SSN, Name, Salary, Gender, BirthDate, Phone, [Address], BranchId, IsManager) VALUES
+INSERT INTO Person.Instructor (SSN, Name, Salary, Gender, BirthDate, Phone, [Address], BranchId, IsManager) VALUES
 ('40001234567890', 'Dr. Youssef Gamal', 10000, 'M', '1980-01-01', '01087654321', 'Cairo', 1, 1),
 ('40001234567891', 'Dr. Fatma Said', 9500, 'F', '1985-03-15', '01187654321', 'Giza', 2, 0),
 ('40001234567892', 'Dr. Hossam Tarek', 9200, 'M', '1982-06-20', '01287654321', 'Alexandria', 3, 0),
