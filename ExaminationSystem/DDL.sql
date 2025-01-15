@@ -124,7 +124,7 @@ CREATE TABLE Organization.Branch_Department_Track_Intake_Student
 	CONSTRAINT FK_Branch_Department_Track_Intake_Student_Student_SSN
 	FOREIGN KEY(Student_SSN)
 	--STUDENT TABLE
-	REFERENCES Person.Student(SSN),
+	REFERENCES Parson.Student(SSN),
 
 	CONSTRAINT UQ_Branch_Department_Track_Intake_Student_Branch_Department_Track_Intake_Id_Student_SSN
 	UNIQUE(Branch_Department_Track_Intake_Id,Student_SSN),
