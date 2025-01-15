@@ -47,7 +47,6 @@ CREATE TABLE Organization.Intake
 	CONSTRAINT UQ_INTAKE_NUMBER UNIQUE (Number),
 )ON ExaminationSystemDB_FG1;
 
-
 --COURSE TABLE
 CREATE TABLE Organization.Course
 (
@@ -131,9 +130,9 @@ CREATE TABLE Organization.Branch_Department_Track_Intake_Student
 	UNIQUE(Branch_Department_Track_Intake_Id,Student_SSN),
 )ON ExaminationSystemDB_FG1;
 
-
-
 CREATE SYNONYM BDTIS FOR Organization.Branch_Department_Track_Intake_Student 
 CREATE SYNONYM BDTI FOR Organization.Branch_Department_Track_Intake
 CREATE SYNONYM BDT FOR Organization.Branch_Department_Track
 CREATE SYNONYM BD FOR Organization.Branch_Department
+
+
