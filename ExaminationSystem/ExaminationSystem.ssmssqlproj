@@ -18,6 +18,21 @@
           <ConnectionProtocol>NotSpecified</ConnectionProtocol>
           <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
         </ConnectionNode>
+        <ConnectionNode Name="ZEZOTAHA\SQLEXPRESS:ZEZOTAHA\zezot">
+          <Created>2025-01-15T17:17:03.1123873+02:00</Created>
+          <Type>SQL</Type>
+          <Server>ZEZOTAHA\SQLEXPRESS</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB />
+          <LoginTimeout>30</LoginTimeout>
+          <TrustServerCertificate>True</TrustServerCertificate>
+          <HostNameInServerCertificate />
+          <EncryptionOption>True</EncryptionOption>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName />
+        </ConnectionNode>
       </Items>
     </LogicalFolder>
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
@@ -71,9 +86,9 @@
           <FullPath>CreateAnswerSchema.sql</FullPath>
         </FileNode>
         <FileNode Name="Views.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ZEZOTAHA\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>ZEZOTAHA\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
           <FullPath>Views.sql</FullPath>
         </FileNode>
       </Items>
