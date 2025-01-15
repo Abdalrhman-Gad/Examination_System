@@ -55,7 +55,7 @@ CREATE VIEW Organization.V_Branche_Department_Track_Intake_Students
 WITH ENCRYPTION
 AS
 	SELECT VBDTI.*,S.*
-	FROM Person.Student AS S
+	FROM Parson.Student AS S
 	JOIN Organization.Branch_Department_Track_Intake_Student AS BDTIS
 	ON BDTIS.Student_SSN=S.SSN
 	JOIN Organization.Branch_Department_Track_Intake AS BDTI
@@ -67,10 +67,11 @@ GO
 SELECT * FROM Organization.V_Branche_Department_Track_Intake_Students
 
 
-CREATE VIEW Organization.Branch_Department_Track_Intake_Instructor_Course
+CREATE VIEW Organization.V_Branch_Department_Track_Intake_Instructor_Course
 WITH ENCRYPTION 
-	SELECT VBDTI.*,I.*,C.
-	FROM [Person].[Instructor] AS I
+AS
+	SELECT VBDTI.*,I.*,C.Code,	C.Name AS Course_Name,C.Description,C.Min_Degree,C.Max_Degree
+	FROM [Parson].[Instructor] AS I
 	JOIN [Organization].[Instructor_Course] AS IC
 	ON I.SSN=IC.Instructor_SSN
 	JOIN [Organization].[Course] AS C
@@ -81,3 +82,129 @@ WITH ENCRYPTION
 	ON BDTI.Id=BDTIIC.Branch_Department_Track_Intake_ID
 	JOIN Organization.V_Branch_Department_Track_Intake AS VBDTI
 	ON BDTI.Intake_Id=VBDTI.I_Id
+
+
+CREATE OR ALTER VIEW Organization.V_Student_Eaxm
+AS
+	SELECT 
+	Parson.Student.*, 
+	Exam.Exams.Id AS Exam_Id, 
+	Exam.Exams.*, 
+	Student_Exams.Result,
+	Track.Id AS Track_Id, 
+	Track.Name, 
+	Intake.Id AS Intake_Id, 
+	Intake.Number 
+	FROM 
+	Parson.Student 
+	JOIN Exam.Student_Exams 
+	ON Parson.Student.SSN = Exam.Student_Exams.Student_SSN
+	JOIN Exam.Exams 
+	ON Exam.Exams.Id = Exam.Student_Exams.Exam_Id
+	JOIN Organization.Branch_Department_Track_Intake BDTI 
+	ON Exam.Exams.Branch_Department_Track_Intake_Course_Instructor_Id = BDTI.Branch_Department_Track_Id
+	JOIN Organization.Branch_Department_Track
+	ON BDTI.Branch_Department_Track_Id = Organization.Branch_Department_Track.Id
+	JOIN Organization.Track 
+	ON Organization.Branch_Department_Track.Track_Id = Organization.Track.Id
+	JOIN Organization.Intake 
+	ON BDTI.Intake_Id = Organization.Intake.Id;
+
+SELECT * FROM Organization.V_Student_Eaxm
+
+
+CREATE OR ALTER VIEW Exam.V_Exam_Questions
+(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Q_Id,Q_Text,
+Created_At,Type,Ins_Cou_Id)
+WITH ENCRYPTION
+AS
+	SELECT E.*,Q.*
+	FROM [Exam].[Questions] AS Q
+	JOIN [Exam].[Exam_Questions] AS EQ
+	ON Q.Id = EQ.Question_Id
+	JOIN [Exam].[Exams] AS E
+	ON EQ.Exam_Id=E.Id
+
+SELECT * FROM Exam.V_Exam_Questions
+
+CREATE OR ALTER VIEW Exam.V_Exam_Questions_Choices
+(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Q_Id,Q_Text,
+Created_At,Type,Ins_Cou_Id,C_Id,C_Q_Id,C_Text,C_Is_True)
+WITH ENCRYPTION
+AS
+	SELECT E.*,Q.*,C.*
+	FROM [Exam].[Questions] AS Q
+	JOIN [Exam].[Exam_Questions] AS EQ
+	ON Q.Id = EQ.Question_Id
+	JOIN [Exam].[Exams] AS E
+	ON EQ.Exam_Id=E.Id
+	JOIN [Exam].[Choices] AS C
+	ON C.Question_Id=Q.Id
+
+SELECT * FROM Exam.V_Exam_Questions_Choices
+
+CREATE OR ALTER VIEW Exam.V_Exam_Questions_T_F
+(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Q_Id,Q_Text,
+Created_At,Type,Ins_Cou_Id,TF_Q_Id,TF_Is_True)
+WITH ENCRYPTION
+AS
+	SELECT E.*,Q.*,TF.*
+	FROM [Exam].[Questions] AS Q
+	JOIN [Exam].[Exam_Questions] AS EQ
+	ON Q.Id = EQ.Question_Id
+	JOIN [Exam].[Exams] AS E
+	ON EQ.Exam_Id=E.Id
+	JOIN [Exam].[True_False] AS TF
+	ON TF.Question_Id=Q.Id
+
+SELECT * FROM Exam.V_Exam_Questions_Text
+
+CREATE OR ALTER VIEW Exam.V_Exam_Questions_T_F
+(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Q_Id,Q_Text,
+Created_At,Type,Ins_Cou_Id,TEXT_Q_Id,Text_Answer)
+WITH ENCRYPTION
+AS
+	SELECT E.*,Q.*,TA.*
+	FROM [Exam].[Questions] AS Q
+	JOIN [Exam].[Exam_Questions] AS EQ
+	ON Q.Id = EQ.Question_Id
+	JOIN [Exam].[Exams] AS E
+	ON EQ.Exam_Id=E.Id
+	JOIN [Exam].[Text_Answers] AS TA
+	ON TA.Question_Id=Q.Id
+
+SELECT * FROM Exam.V_Exam_Questions_T_F
+
+CREATE VIEW Answer.V_Student_Answer
+WITH ENCRYPTION 
+AS
+	SELECT S.*, SA.*
+	FROM Answer.Student_Answer AS SA
+	JOIN Parson.Student AS S
+	ON S.SSN=SA.Student_SSN
+
+SELECT * FROM Answer.V_Student_Answer
+
+CREATE VIEW Answer.V_Student_Answer_T_F
+WITH ENCRYPTION 
+AS
+	SELECT S.*, SA.*,TF.*
+	FROM Answer.Student_Answer AS SA
+	JOIN Parson.Student AS S
+	ON S.SSN=SA.Student_SSN
+	JOIN Answer.True_False_Answer TF
+	ON SA.Id=TF.Answer_Id
+
+SELECT * FROM Answer.V_Student_Answer_T_F
+
+CREATE VIEW Answer.V_Student_Answer_MCQ
+WITH ENCRYPTION 
+AS
+	SELECT S.*, SA.*,MCQ.*
+	FROM Answer.Student_Answer AS SA
+	JOIN Parson.Student AS S
+	ON S.SSN=SA.Student_SSN
+	JOIN [Answer].[Mcq_Answer] AS MCQ
+	ON SA.Id=MCQ.Answer_Id
+
+SELECT * FROM Answer.V_Student_Answer_MCQ

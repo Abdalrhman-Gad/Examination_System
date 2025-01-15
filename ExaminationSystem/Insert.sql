@@ -170,3 +170,94 @@ VALUES
 (10, 9), -- Instructor_Course_Id = 10, Branch_Department_Track_Intake_ID = 9
 (11, 10); -- Instructor_Course_Id = 11, Branch_Department_Track_Intake_ID = 10
 GO
+
+
+-- Insert data into Exam.Exams
+INSERT INTO Exam.Exams (Start_Time, End_Time, Allowances, Branch_Department_Track_Intake_Course_Instructor_Id)
+VALUES 
+('2025-01-10 09:00:00', '2025-01-10 11:00:00', 'Calculator allowed', 11),
+('2025-01-11 10:00:00', '2025-01-11 12:00:00', 'Open book', 2),
+('2025-01-12 13:00:00', '2025-01-12 15:00:00', 'None', 3),
+('2025-01-13 09:30:00', '2025-01-13 11:30:00', 'Dictionary allowed', 4),
+('2025-01-14 14:00:00', '2025-01-14 16:00:00', 'Calculator allowed', 5),
+('2025-01-15 08:00:00', '2025-01-15 10:00:00', 'None', 6),
+('2025-01-16 11:00:00', '2025-01-16 13:00:00', 'Open book', 7),
+('2025-01-17 15:00:00', '2025-01-17 17:00:00', 'Calculator allowed', 8),
+('2025-01-18 09:00:00', '2025-01-18 11:00:00', 'None', 9),
+('2025-01-19 10:00:00', '2025-01-19 12:00:00', 'Open book', 10);
+
+-- Insert data into Exam.Questions
+INSERT INTO Exam.Questions (Question_Text, Type, Instructor_Course_Id)
+VALUES
+('What is SQL?', 'TEXT', 11),
+('Choose the correct syntax for SELECT.', 'CHOOSE', 2),
+('SQL is case sensitive.', 'TRUE OR FALSE', 3),
+('Explain normalization.', 'TEXT', 4),
+('Select the aggregate function.', 'CHOOSE', 5),
+('Indexes improve query speed.', 'TRUE OR FALSE', 6),
+('Describe JOIN types.', 'TEXT', 7),
+('Identify the primary key constraint.', 'CHOOSE', 8),
+('Databases can be relational.', 'TRUE OR FALSE', 9),
+('Explain ACID properties.', 'TEXT', 10);
+
+-- Insert data into Exam.Exam_Questions
+INSERT INTO Exam.Exam_Questions (Exam_Id, Question_Id, Degree)
+VALUES
+(6, 11, 10),
+(6, 2, 15),
+(7, 3, 5),
+(7, 4, 20),
+(3, 5, 15),
+(3, 6, 10),
+(4, 7, 25),
+(4, 8, 15),
+(5, 9, 5),
+(5, 10, 20);
+
+-- Insert data into Exam.Student_Exams using provided student data
+INSERT INTO Exam.Student_Exams (Student_SSN, Exam_Id, Result, Type)
+VALUES
+('30001234567890', 6, 87.5, 'C'),
+('30001234567891', 7, 91.0, 'E'),
+('30001234567892', 3, 78.5, 'C'),
+('30001234567893', 4, 85.0, 'E'),
+('30001234567894', 5, 90.0, 'C'),
+('30001234567895', 8, 82.0, 'E'),
+('30001234567896', 9, 88.0, 'C'),
+('30001234567897', 3, 79.5, 'E'),
+('30001234567898', 4, 84.0, 'C'),
+('30001234567899', 5, 89.5, 'E');
+
+-- Insert data into Exam.Choices
+INSERT INTO Exam.Choices (Question_Id, Choice_Text, Is_True)
+VALUES
+(3, 'SELECT * FROM table;', 1),
+(3, 'GET * FROM table;', 0),
+(3, 'SUM()', 1),
+(6, 'COUNT()', 1),
+(6, 'PRIMARY KEY', 1),
+(6, 'FOREIGN KEY', 0),
+(9, 'INDEX', 0),
+(9, 'DEFAULT', 0),
+(9, 'AVG()', 1),
+(9, 'ORDER BY', 0);
+
+truncate  table Exam.Choices
+
+-- Insert data into Exam.True_False
+INSERT INTO Exam.True_False (Question_Id, Is_True)
+VALUES
+(4, 0),
+(7, 1),
+(10, 1);
+
+truncate table Exam.True_False
+
+-- Insert data into Exam.Text_Answers
+INSERT INTO Exam.Text_Answers (Question_Id, Answer_Text)
+VALUES
+(2, 'SQL stands for Structured Query Language.'),
+(5, 'Normalization reduces data redundancy.'),
+(8, 'JOINs combine rows from multiple tables.'),
+(11, 'ACID stands for Atomicity, Consistency, Isolation, Durability.')
+	
