@@ -69,7 +69,7 @@ SELECT * FROM Organization.V_Branche_Department_Track_Intake_Students
 
 CREATE VIEW Organization.Branch_Department_Track_Intake_Instructor_Course
 WITH ENCRYPTION 
-	SELECT VBDTI.*,I.*,C.*
+	SELECT VBDTI.*,I.*,C.
 	FROM [Person].[Instructor] AS I
 	JOIN [Organization].[Instructor_Course] AS IC
 	ON I.SSN=IC.Instructor_SSN
