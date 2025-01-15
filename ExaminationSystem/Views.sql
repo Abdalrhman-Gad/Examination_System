@@ -208,3 +208,14 @@ AS
 	ON SA.Id=MCQ.Answer_Id
 
 SELECT * FROM Answer.V_Student_Answer_MCQ
+
+CREATE VIEW Answer.V_Student_Answer_Text
+WITH ENCRYPTION 
+AS
+	SELECT S.*, SA.*,T.*
+	FROM Answer.Student_Answer AS SA
+	JOIN Parson.Student AS S
+	ON S.SSN=SA.Student_SSN
+	JOIN [Answer].[Text_Answer] AS T
+	ON SA.Id=T.Answer_Id
+SELECT * FROM Answer.V_Student_Answer_Text
