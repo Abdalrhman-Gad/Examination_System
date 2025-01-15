@@ -125,7 +125,7 @@ CREATE TABLE Organization.Branch_Department_Track_Intake_Student
 	CONSTRAINT FK_Branch_Department_Track_Intake_Student_Student_SSN
 	FOREIGN KEY(Student_SSN)
 	--STUDENT TABLE
-	REFERENCES Person.Student(Id),
+	REFERENCES Person.Student(SSN),
 
 	CONSTRAINT UQ_Branch_Department_Track_Intake_Student_Branch_Department_Track_Intake_Id_Student_SSN
 	UNIQUE(Branch_Department_Track_Intake_Id,Student_SSN),
@@ -133,12 +133,7 @@ CREATE TABLE Organization.Branch_Department_Track_Intake_Student
 
 
 
-
+CREATE SYNONYM BDTIS FOR Organization.Branch_Department_Track_Intake_Student 
 CREATE SYNONYM BDTI FOR Organization.Branch_Department_Track_Intake
 CREATE SYNONYM BDT FOR Organization.Branch_Department_Track
 CREATE SYNONYM BD FOR Organization.Branch_Department
-
-
-SELECT B.NAME,I.NAME AS MANAGER
-FROM BRANCH AS B JOIN INSTRUCTOR AS I
-ON B.MANAGER_ID=I.SSN
