@@ -40,6 +40,18 @@
           <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
           <FullPath>DDL.sql</FullPath>
         </FileNode>
+        <FileNode Name="STUDENT_BDIT_STUDENT_INSTRUCTOR_COURSE.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
+          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <FullPath>STUDENT_BDIT_STUDENT_INSTRUCTOR_COURSE.sql</FullPath>
+        </FileNode>
+        <FileNode Name="CreateParsonSchema.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
+          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <FullPath>CreateParsonSchema.sql</FullPath>
+        </FileNode>
       </Items>
     </LogicalFolder>
     <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
