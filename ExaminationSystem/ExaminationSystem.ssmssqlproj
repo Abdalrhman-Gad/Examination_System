@@ -3,6 +3,21 @@
   <Items>
     <LogicalFolder Name="Connections" Type="2" Sorted="true">
       <Items>
+        <ConnectionNode Name="(local):DESKTOP-IMNBBEP\3bdalr7man Gad">
+          <Created>2025-01-16T09:17:49.1034411+02:00</Created>
+          <Type>SQL</Type>
+          <Server>(local)</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB />
+          <LoginTimeout>30</LoginTimeout>
+          <TrustServerCertificate>True</TrustServerCertificate>
+          <HostNameInServerCertificate />
+          <EncryptionOption>True</EncryptionOption>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
         <ConnectionNode Name="sql.bsite.net\MSSQL2016:examinationsystem_SampleDB">
           <Created>2025-01-13T14:07:16.3118765+02:00</Created>
           <Type>SQL</Type>
@@ -18,7 +33,7 @@
           <ConnectionProtocol>NotSpecified</ConnectionProtocol>
           <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
         </ConnectionNode>
-        <ConnectionNode Name="ZEZOTAHA\SQLEXPRESS:ZEZOTAHA\zezot">
+        <ConnectionNode Name="ZEZOTAHA\SQLEXPRESS:DESKTOP-IMNBBEP\3bdalr7man Gad">
           <Created>2025-01-15T17:17:03.1123873+02:00</Created>
           <Type>SQL</Type>
           <Server>ZEZOTAHA\SQLEXPRESS</Server>
@@ -37,12 +52,18 @@
     </LogicalFolder>
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
+        <FileNode Name="CreateBDTIProcedure.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local):True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>CreateBDTIProcedure.sql</FullPath>
+        </FileNode>
         <FileNode Name="CreateDatabase.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
           <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
           <FullPath>CreateDatabase.sql</FullPath>
-        </FileNode>s
+        </FileNode>
         <FileNode Name="Insert.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
@@ -55,24 +76,24 @@
           <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
           <FullPath>CreatePersonSchema.sql</FullPath>
         </FileNode>
-        <!-- <FileNode Name="CreateSomeTablesByZezo.sql">
+        <FileNode Name="CreateSomeTablesByZezo.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
           <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
           <FullPath>CreateSomeTablesByZezo.sql</FullPath>
-        </FileNode> -->
-        <!-- <FileNode Name="DDL.sql">
+        </FileNode>
+        <FileNode Name="DDL.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
           <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
           <FullPath>DDL.sql</FullPath>
-        </FileNode> -->
-        <!-- <FileNode Name="STUDENT_BDIT_STUDENT_INSTRUCTOR_COURSE.sql">
+        </FileNode>
+        <FileNode Name="STUDENT_BDIT_STUDENT_INSTRUCTOR_COURSE.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
           <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
           <FullPath>STUDENT_BDIT_STUDENT_INSTRUCTOR_COURSE.sql</FullPath>
-        </FileNode> -->
+        </FileNode>
         <FileNode Name="CreateOrganizationSchema.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
@@ -92,22 +113,16 @@
           <FullPath>CreateAnswerSchema.sql</FullPath>
         </FileNode>
         <FileNode Name="Views.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ZEZOTAHA\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>ZEZOTAHA\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local):True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>Views.sql</FullPath>
         </FileNode>
-        <FileNode Name="insertionProcedure">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ZEZOTAHA\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>ZEZOTAHA\SQLEXPRESS</AssociatedConnSrvName>
+        <FileNode Name="insertionProcedure.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local):True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>insertionProcedure.sql</FullPath>
-        </FileNode>
-        <FileNode Name="CLR">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ZEZOTAHA\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>ZEZOTAHA\SQLEXPRESS</AssociatedConnSrvName>
-          <AssociatedConnUserName />
-          <FullPath>CLR.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
