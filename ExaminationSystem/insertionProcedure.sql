@@ -115,6 +115,8 @@ BEGIN
         PRINT ERROR_MESSAGE();
     END CATCH;
 END;
+
+
 GO
 
 
@@ -208,4 +210,19 @@ BEGIN
 
         SET @Result = @Answer_Degree;
     END
+END;
+
+GO
+
+------------------ Try Test (Fill Exam Questions)--------
+CREATE PROCEDURE FillExamQuestions
+    @ExamID INT
+AS
+BEGIN
+	-- Check Exam Number
+    SELECT Q.Question_Text, Q.Type
+    FROM 
+       Exam.Exam_Questions EQ INNER JOIN Exam.Questions Q
+	   ON EQ.Question_Id = Q.Id
+	   WHERE EQ.Exam_Id = @ExamID;
 END;
