@@ -163,7 +163,8 @@ CREATE OR ALTER PROC [Organization].[Insert_Branch_Department_Track_Intake]
 AS
 BEGIN
 	BEGIN TRY
-		DECLARE @Intake_Id INT,@BDTI_Id INT
+		DECLARE @Intake_Id INT,
+				@BDTI_Id INT
 
 		--GET INTAKE ID
 		SELECT @Intake_Id=I.Id
@@ -192,3 +193,315 @@ BEGIN
 END
 
 EXEC [Organization].[Insert_Branch_Department_Track_Intake] 15,'INTK2024-2'
+
+--PROCEDURE TO INSERT 
+CREATE OR ALTER PROCEDURE [Organization].[Insert_Branch_Department_Track_Intake_Instructor_Course]
+    @Branch_Department_Track_Intake_ID INT,
+    @Instructor_SSN NVARCHAR(50),
+    @Course_Code CHAR(5)
+AS
+BEGIN
+    BEGIN TRY
+        DECLARE @Instructor_Course_Id INT;
+
+        -- Validate Instructor SSN
+        IF NOT EXISTS (
+            SELECT 1
+            FROM Parson.Instructor AS I
+            WHERE I.SSN = @Instructor_SSN
+        )
+        BEGIN
+            THROW 52000, 'Invalid Instructor SSN provided.', 1;
+        END
+
+        -- Validate Course Code
+        IF NOT EXISTS (
+            SELECT 1
+            FROM Organization.Course AS C
+            WHERE C.Code = @Course_Code
+        )
+        BEGIN
+            THROW 52000, 'Invalid Course Code provided.', 1;
+        END
+
+        -- Get Instructor Course ID
+        SELECT @Instructor_Course_Id = IC.Id
+        FROM Organization.Instructor_Course AS IC
+        WHERE IC.Course_Code = @Course_Code AND IC.Instructor_SSN = @Instructor_SSN;
+
+        IF @Instructor_Course_Id IS NOT NULL
+        BEGIN
+            INSERT INTO [Organization].[Branch_Department_Track_Intake_Instructor_Course]
+                (Branch_Department_Track_Intake_ID, Instructor_Course_Id)
+            VALUES
+                (@Branch_Department_Track_Intake_ID, @Instructor_Course_Id);
+        END
+        ELSE
+        BEGIN
+            THROW 52001, 'Instructor is not assigned to this course.', 1;
+        END
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE();
+    END CATCH
+END
+
+
+EXEC [Organization].[Insert_Branch_Department_Track_Intake_Instructor_Course]2,'40001234567890','C001'
+
+CREATE OR ALTER PROCEDURE [Organization].[Insert_Branch_Department_Track_intake_student]
+    @Branch_Name NVARCHAR(50),
+    @Department_Name NVARCHAR(50),
+	@Track_Name NVARCHAR(50),
+	@Intake_Number NVARCHAR(50) ,
+	@student_SSN char(14)
+AS
+BEGIN
+    BEGIN TRY
+        DECLARE
+		        @Track_Id int ,
+		        @Branch_Department_Id INT,
+				@Branch_Department_Track_ID INT,
+				@Branch_Department_Track_Intake_ID INT,
+				@Student_SSN_ char(14),
+				@Intake_ID int,
+				@student_t int
+
+	  --GET BRANCH_DEPARTMENT ID
+        SELECT @Branch_Department_Id=BD.Id
+		FROM Organization.Branch_Department BD , Organization.Branch B, Organization.Department D 
+		WHERE  B.Name=@Branch_Name and D.Name= @Department_Name and B.Id=BD.Branch_Id and D.Id=BD.Department_Id
+	
+			
+		--GET Branch_Department_track_id
+		SELECT @Track_Id=Track.Id ,@Branch_Department_Track_ID=BDT.Branch_Department_Id
+		FROM Organization.Track , Organization.Branch_Department_Track BDT
+		WHERE Track.Name=@Track_Name and Track.Id=BDT.Track_Id
+		 
+		--Get intake_id
+
+		SELECT @Intake_ID=Id
+		FROM Intake
+		WHERE Intake.Number=@Intake_Number
+
+
+	    --GET Branch_Department_track_intake_ID
+		SELECT @Branch_Department_Track_Intake_ID=BDTI.Id
+		FROM Branch_Department_Track_Intake BDTI , Branch_Department_Track BDT
+		WHERE BDT.Id=BDTI.Branch_Department_Track_Id AND
+		BDTI.Branch_Department_Track_Id=@Branch_Department_Track_ID and BDTI.Intake_Id=@Intake_ID
+		
+		SELECT @Student_SSN_=Student.SSN
+		FROM Parson.Student
+		WHERE Student.SSN=@student_SSN
+	
+		  IF (@Student_SSN_ IS NOT NULL AND @Branch_Department_Track_Intake_ID IS NOT NULL)
+		  BEGIN
+			SELECT @student_t=Id
+			FROM Branch_Department_Track_Intake_Student BDTIS 
+			WHERE BDTIS.Student_SSN=@Student_SSN_ and BDTIS.Branch_Department_Track_Intake_Id=@Branch_Department_Track_Intake_ID
+			
+			IF(@student_t IS NULL)
+			BEGIN
+				INSERT INTO Organization.Branch_Department_Track_Intake_Student
+				VALUES(@Branch_Department_Track_Intake_ID,@Student_SSN_)
+			END
+			ELSE
+			BEGIN
+				THROW 52000, 'Invalid Data', 1;
+			END
+		  END
+		  ELSE
+		  BEGIN
+			THROW 52000, 'Invalid Data', 1;
+		  END
+	END TRY
+	begin catch
+		PRINT ERROR_MESSAGE();
+	end catch
+end
+
+EXEC [Organization].[Insert_Branch_Department_Track_intake_student]'ITI ASYUT','WEB','.NET','INTK2024-1','30001234567890'
+
+
+---KASBAN
+CREATE OR ALTER PROCEDURE addQuestionTrueAndfalse
+    @question VARCHAR(250),
+    @istrue BIT,
+    @instructor_id CHAR(14),
+    @course_name VARCHAR(30)
+AS
+BEGIN
+    BEGIN TRY
+        DECLARE @id INT;
+        DECLARE @course_code CHAR(5);
+        DECLARE @instructorCourse_id INT;
+
+        -- Get Course Code
+        SELECT @course_code = Code
+        FROM Organization.Course
+        WHERE Name = @course_name;
+
+        IF @course_code IS NULL
+        BEGIN
+            THROW 52000, 'Invalid course name provided.', 1;
+        END
+
+        -- Get Instructor Course ID
+        SELECT @instructorCourse_id = id
+        FROM Organization.Instructor_Course
+        WHERE Instructor_SSN = @instructor_id AND Course_Code = @course_code;
+
+        IF @instructorCourse_id IS NULL
+        BEGIN
+            THROW 52001, 'Instructor is not assigned to the specified course.', 1;
+        END
+
+        -- Insert Question
+        INSERT INTO Exam.Questions (Question_Text, Created_At, Type, Instructor_Course_Id)
+        VALUES (@question, GETDATE(), 'true or false', @instructorCourse_id);
+
+        -- Get the newly inserted Question ID
+        SELECT @id = SCOPE_IDENTITY();
+
+        -- Insert into True_False with explicit columns
+        INSERT INTO Exam.True_False (Question_Id, Is_True)
+        VALUES (@id, @istrue);
+
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE();
+    END CATCH
+END;
+
+
+execute addQuestionTrueAndfalse 'ARE U OK?',1,'40001234567891','Data Structures'
+
+
+CREATE OR ALTER PROCEDURE addQuestionChoices
+    @question VARCHAR(250),
+    @instructor_id CHAR(14),
+    @course_name VARCHAR(30)
+AS
+BEGIN
+    BEGIN TRY
+        DECLARE @course_code CHAR(5);
+        DECLARE @instructorCourse_id INT;
+
+        -- Validate Course Existence
+        SELECT @course_code = Code
+        FROM Organization.Course
+        WHERE Name = @course_name;
+
+        IF @course_code IS NULL
+        BEGIN
+            THROW 52000, 'Invalid course name provided.', 1;
+        END
+
+        -- Validate Instructor-Course Relationship
+        SELECT @instructorCourse_id = id
+        FROM Organization.Instructor_Course
+        WHERE Instructor_SSN = @instructor_id AND Course_Code = @course_code;
+
+        IF @instructorCourse_id IS NULL
+        BEGIN
+            THROW 52001, 'Instructor is not assigned to the specified course.', 1;
+        END
+
+        -- Insert Question
+        INSERT INTO Exam.Questions (Question_Text, Created_At, Type, Instructor_Course_Id)
+        VALUES (@question, GETDATE(), 'CHOOSE', @instructorCourse_id);
+
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE();
+    END CATCH
+END;
+
+
+exec addQuestionmZQChoices 'quest choice','40001234567891','Data Structures'
+
+
+CREATE OR ALTER PROCEDURE addQuestionText
+    @question VARCHAR(250),
+    @answer VARCHAR(250),
+    @instructor_id CHAR(14),
+    @course_name VARCHAR(30)
+AS
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION;  
+
+        DECLARE @question_id INT;
+        DECLARE @course_code CHAR(5);
+        DECLARE @instructorCourse_id INT;
+
+        -- Input Validation
+        IF (LTRIM(RTRIM(@question)) = '' OR LTRIM(RTRIM(@answer)) = '')
+        BEGIN
+            THROW 52002, 'Question and Answer cannot be empty.', 1;
+        END
+
+        -- Validate Course
+        SELECT @course_code = Code
+        FROM Organization.Course
+        WHERE Name = @course_name;
+
+        IF @course_code IS NULL
+        BEGIN
+            THROW 52000, 'Invalid course name provided.', 1;
+        END
+
+        -- Validate Instructor-Course Assignment
+        SELECT @instructorCourse_id = id
+        FROM Organization.Instructor_Course
+        WHERE Instructor_SSN = @instructor_id AND Course_Code = @course_code;
+
+        IF @instructorCourse_id IS NULL
+        BEGIN
+            THROW 52001, 'Instructor is not assigned to the specified course.', 1;
+        END
+
+        -- Prevent Duplicate Question Entry
+        IF EXISTS (
+            SELECT 1
+            FROM Exam.Questions
+            WHERE Question_Text = @question AND Instructor_Course_Id = @instructorCourse_id
+        )
+        BEGIN
+            THROW 52003, 'Duplicate question detected for this instructor and course.', 1;
+        END
+
+        -- Insert Question
+        INSERT INTO Exam.Questions (Question_Text, Created_At, Type, Instructor_Course_Id)
+        VALUES (@question, GETDATE(), 'TEXT', @instructorCourse_id);
+
+        -- Retrieve Question ID
+        SET @question_id = SCOPE_IDENTITY();
+
+        -- Insert Answer into Text_Answers
+        INSERT INTO Exam.Text_Answers (Question_Id, Answer_Text)
+        VALUES (@question_id, @answer);
+
+        COMMIT TRANSACTION;  -- Commit if all successful
+
+        PRINT 'Question and answer inserted successfully.';
+
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;  -- Rollback on error
+
+        -- Detailed Error Reporting
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        DECLARE @ErrorSeverity INT = ERROR_SEVERITY();
+        DECLARE @ErrorState INT = ERROR_STATE();
+
+        PRINT 'Error occurred: ' + @ErrorMessage;
+        THROW 52004, @ErrorMessage, 1;
+    END CATCH
+END
+
+
+
+
