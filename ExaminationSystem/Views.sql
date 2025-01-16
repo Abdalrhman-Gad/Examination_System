@@ -159,7 +159,7 @@ AS
 
 SELECT * FROM Exam.V_Exam_Questions_Text
 
-CREATE OR ALTER VIEW Exam.V_Exam_Questions_T_F
+CREATE OR ALTER VIEW Exam.V_Exam_Questions_Text
 (E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Q_Id,Q_Text,
 Created_At,Type,Ins_Cou_Id,TEXT_Q_Id,Text_Answer)
 WITH ENCRYPTION
@@ -172,6 +172,7 @@ AS
 	ON EQ.Exam_Id=E.Id
 	JOIN [Exam].[Text_Answers] AS TA
 	ON TA.Question_Id=Q.Id
+
 
 SELECT * FROM Exam.V_Exam_Questions_T_F
 
