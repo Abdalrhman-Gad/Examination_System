@@ -160,3 +160,27 @@ BEGIN
 	SET [Answer_Degree] = @Degree
 	WHERE [Id] = @Answer_Id;
 END
+---------------------
+--TRIGGER TO INSERT STUDENT ANSWER IN EXAM DATE AND TIME
+CREATE OR ALTER TRIGGER Check_Student_Answer_Time
+ON [Answer].[Student_Answer]
+AFTER INSERT
+AS
+BEGIN
+    BEGIN TRY
+        IF EXISTS (
+            SELECT 1
+            FROM INSERTED i
+            JOIN [Exam].[Exam_Questions] eq ON i.Exam_Question_Id = eq.Id
+            JOIN [Exam].[Exams] e ON eq.Exam_Id = e.Id
+            WHERE GETDATE() NOT BETWEEN e.Start_Time AND e.End_Time
+        )
+        BEGIN
+            ROLLBACK;  -- Rollback first
+            THROW 52000, 'Cannot insert answer, exam time has ended.', 1;
+        END
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE();
+    END CATCH
+END
