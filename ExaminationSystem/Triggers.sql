@@ -20,10 +20,10 @@ BEGIN
         JOIN inserted i ON e.Id = i.Exam_Id;
     END
 
-    ELSE IF (UPDATE([Degree]))
+	ELSE
     BEGIN
         UPDATE e
-        SET e.Total_Exam_Degree = e.Total_Exam_Degree + (i.Degree - d.Degree)
+        SET e.Total_Exam_Degree = e.Total_Exam_Degree + (ISNULL(i.Degree,0) - ISNULL(d.Degree,0))
         FROM [Exam].[Exams] e
         JOIN inserted i ON e.Id = i.Exam_Id
         JOIN deleted d ON i.Exam_Id = d.Exam_Id AND i.Id= d.Id; 
@@ -184,8 +184,6 @@ END;
 ---dd--
 select * from [Answer].[Student_Answer]
 select * from [Exam].[Student_Exams]
->>>>>>> Amr_branch
-=======
 ---------------------
 --TRIGGER TO INSERT STUDENT ANSWER IN EXAM DATE AND TIME
 CREATE OR ALTER TRIGGER Check_Student_Answer_Time
@@ -210,4 +208,3 @@ BEGIN
         PRINT ERROR_MESSAGE();
     END CATCH
 END
->>>>>>> ccbe0f4c8b7323dd065f9c61ba90a9978e2aadec
