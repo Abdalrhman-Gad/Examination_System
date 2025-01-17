@@ -13,6 +13,24 @@ CREATE PROC [Organization].[Insert_Branch]
 		END CATCH
 	END
 
+--PROCEDURE TO UPDATE BRANCH
+CREATE PROC [Organization].[Update_Branch]
+    @BranchId INT,        
+    @Name NVARCHAR(50),
+    @Location NVARCHAR(20)
+AS
+BEGIN
+    BEGIN TRY
+        UPDATE [Organization].[Branch]
+        SET Name = @Name,
+            Location = @Location
+        WHERE Id = @BranchId  
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE();
+    END CATCH
+END
+
 --PROCEDURE TO INSERT DEPARTMENT
 CREATE PROC [Organization].[Insert_Department]
 	@Name NVARCHAR(50),
@@ -27,6 +45,25 @@ CREATE PROC [Organization].[Insert_Department]
 			PRINT 'Error while in inserting department';
 		END CATCH
 	END
+
+--PROCEDURE TO UPADTE DEPARTMENT
+CREATE PROC [Organization].[Update_Department]
+    @DepartmentId INT,        
+    @Name NVARCHAR(50),
+    @Description NVARCHAR(100)
+AS
+BEGIN
+    BEGIN TRY
+        UPDATE [Organization].[Department]
+        SET Name = @Name,
+            Description = @Description
+        WHERE Id = @DepartmentId 
+    END TRY
+    BEGIN CATCH
+        PRINT 'Error while updating department';
+    END CATCH
+END
+
 
 --PROCEDURE TO INSERT TRACK
 CREATE PROC [Organization].[Insert_Track]
@@ -43,6 +80,24 @@ CREATE PROC [Organization].[Insert_Track]
 		END CATCH
 	END
 
+--PROCEDURE TO UPDATE TRACK
+CREATE PROC [Organization].[Update_Track]
+    @TrackId INT,              
+    @Name NVARCHAR(50),
+    @Description NVARCHAR(100)
+AS
+BEGIN
+    BEGIN TRY
+        UPDATE [Organization].[Track]
+        SET Name = @Name,
+            Description = @Description
+        WHERE Id = @TrackId
+    END TRY
+    BEGIN CATCH
+        PRINT 'Error while updating track';  
+    END CATCH
+END
+
 --PROCEDURE TO INSERT INTAKE
 CREATE OR ALTER PROC [Organization].[Insert_Intake]
 	@Number NVARCHAR(50),
@@ -58,6 +113,27 @@ CREATE OR ALTER PROC [Organization].[Insert_Intake]
 			PRINT 'Error while in inserting Intake';
 		END CATCH
 	END
+
+--PROCEDURE TO UPDATE INTAKE
+CREATE OR ALTER PROC [Organization].[Update_Intake]
+    @IntakeId INT,            
+    @Number NVARCHAR(50),
+    @Year INT,
+    @Round INT
+AS
+BEGIN
+    BEGIN TRY
+        UPDATE [Organization].[Intake]
+        SET Number = @Number,
+            [Year] = @Year,
+            [Round] = @Round
+        WHERE Id = @IntakeId  
+    END TRY
+    BEGIN CATCH
+        PRINT 'Error while updating Intake';  
+    END CATCH
+END
+
 
 --PROCEDURE TO INSERT BRANCH DEPARTMENT
 CREATE OR ALTER PROCEDURE [Organization].[Insert_Branch_Department]
@@ -435,7 +511,6 @@ BEGIN
         DECLARE @question_id INT;
         DECLARE @course_code CHAR(5);
         DECLARE @instructorCourse_id INT;
-
         -- Input Validation
         IF (LTRIM(RTRIM(@question)) = '' OR LTRIM(RTRIM(@answer)) = '')
         BEGIN
@@ -461,8 +536,7 @@ BEGIN
         BEGIN
             THROW 52001, 'Instructor is not assigned to the specified course.', 1;
         END
-
-        -- Prevent Duplicate Question Entry
+		-- Prevent Duplicate Question Entry
         IF EXISTS (
             SELECT 1
             FROM Exam.Questions
@@ -501,7 +575,3 @@ BEGIN
         THROW 52004, @ErrorMessage, 1;
     END CATCH
 END
-
-
-
-
