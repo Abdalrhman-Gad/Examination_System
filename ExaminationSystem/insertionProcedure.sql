@@ -115,6 +115,8 @@ BEGIN
         PRINT ERROR_MESSAGE();
     END CATCH;
 END;
+
+
 GO
 
 
@@ -208,4 +210,125 @@ BEGIN
 
         SET @Result = @Answer_Degree;
     END
+END;
+
+GO
+
+------------------ Try Test (Fill Exam Questions)--------
+CREATE PROCEDURE FillExamQuestions
+    @ExamID INT
+AS
+BEGIN
+	-- Check Exam Number
+    SELECT Q.Question_Text, Q.Type
+    FROM 
+       Exam.Exam_Questions EQ INNER JOIN Exam.Questions Q
+	   ON EQ.Question_Id = Q.Id
+	   WHERE EQ.Exam_Id = @ExamID;
+END;
+
+
+--------------------allocat exam to students-------------
+
+CREATE TYPE Exam.StudentSSNTableType AS TABLE (
+    SSN CHAR(14) NOT NULL PRIMARY KEY
+);
+
+
+CREATE OR ALTER PROCEDURE Exam.Assign_Exam_To_Students
+    @Exam_Id INT,
+    @Exam_Type CHAR(1),
+    @StudentsList Exam.StudentSSNTableType READONLY 
+AS
+BEGIN
+
+
+    IF NOT EXISTS (SELECT 1 FROM Exam.Exams WHERE Id = @Exam_Id)
+    BEGIN
+        PRINT 'Error: The specified exam does not exist.';
+        RETURN;
+    END
+    INSERT INTO Exam.Student_Exams (Student_SSN, Exam_Id, Result, Type)
+    SELECT 
+        S.SSN, 
+        @Exam_Id, 
+        0, 
+        @Exam_Type
+    FROM @StudentsList S
+    WHERE NOT EXISTS (
+        SELECT 1 FROM Exam.Student_Exams 
+        WHERE Exam_Id = @Exam_Id AND Student_SSN = S.SSN
+    );
+
+    PRINT 'Students have been successfully assigned to the exam.';
+END;
+
+------------------allocate questions to exam---------------------------------
+CREATE OR ALTER PROCEDURE Exam.Allocate_Questions_For_Exam
+    @Exam_Id INT,
+    @Course_Code CHAR(5),
+    @Num_Choose_Questions INT = 0,
+    @Choose_Question_Degree INT = 0,
+    @Num_True_False_Questions INT = 0,
+    @True_False_Question_Degree INT = 0,
+    @Num_Text_Questions INT = 0,
+    @Text_Question_Degree INT = 0
+AS
+BEGIN
+    -- Declare error handling variables
+    BEGIN TRY
+        -- Check if the total degree exceeds max degree for the course
+        IF ((@Num_Choose_Questions * @Choose_Question_Degree) + 
+            (@Num_True_False_Questions * @True_False_Question_Degree) + 
+            (@Num_Text_Questions * @Text_Question_Degree) +
+			(SELECT [Total_Exam_Degree] FROM [Exam].[Exams] WHERE [Id] = @Exam_Id)) > 
+            (SELECT [Max_Degree] FROM [Organization].[Course] WHERE Code = @Course_Code)
+        BEGIN
+            PRINT 'You have exceeded the maximum degree allowed for the course.';
+            RETURN;
+        END
+
+        -- Start a transaction
+        BEGIN TRANSACTION;
+
+        -- Allocate Choose questions
+        INSERT INTO Exam.Exam_Questions (Exam_Id, Question_Id, Degree)
+        SELECT TOP (@Num_Choose_Questions) @Exam_Id, Q.Id, @Choose_Question_Degree
+        FROM Exam.Questions Q
+        WHERE Q.Instructor_Course_Id IN (SELECT id FROM [Organization].[Instructor_Course] WHERE [Course_Code] = @Course_Code) 
+		AND Q.Id NOT IN (SELECT Q.Id FROM[Exam].[Exam_Questions] WHERE Exam_Id = @Exam_Id)
+        AND Q.Type = 'CHOOSE'
+        ORDER BY NEWID();
+
+        -- Allocate True/False questions
+        INSERT INTO Exam.Exam_Questions (Exam_Id, Question_Id, Degree)
+        SELECT TOP (@Num_True_False_Questions) @Exam_Id, Q.Id, @True_False_Question_Degree
+        FROM Exam.Questions Q
+        WHERE Q.Instructor_Course_Id IN (SELECT id FROM [Organization].[Instructor_Course] WHERE [Course_Code] = @Course_Code)
+		AND Q.Id NOT IN (SELECT Q.Id FROM[Exam].[Exam_Questions] WHERE Exam_Id = @Exam_Id)
+        AND Q.Type = 'TRUE OR FALSE'
+        ORDER BY NEWID();
+
+        -- Allocate Text questions
+        INSERT INTO Exam.Exam_Questions (Exam_Id, Question_Id, Degree)
+        SELECT TOP (@Num_Text_Questions) @Exam_Id, Q.Id, @Text_Question_Degree
+        FROM Exam.Questions Q
+        WHERE Q.Instructor_Course_Id IN (SELECT id FROM [Organization].[Instructor_Course] WHERE [Course_Code] = @Course_Code)
+		AND Q.Id NOT IN (SELECT Q.Id FROM[Exam].[Exam_Questions] WHERE Exam_Id = @Exam_Id)
+        AND Q.Type = 'TEXT'
+        ORDER BY NEWID();
+
+        -- Commit the transaction
+        COMMIT TRANSACTION;
+
+        PRINT 'Exam has been successfully created!';
+
+    END TRY
+    BEGIN CATCH
+        -- If an error occurs, rollback the transaction
+        ROLLBACK TRANSACTION;
+        PRINT 'An error occurred during the exam creation process.';
+        -- You can also throw the error to get more details
+        THROW;
+    END CATCH;
 END;
