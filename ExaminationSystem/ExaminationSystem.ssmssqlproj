@@ -4,39 +4,9 @@
     <LogicalFolder Name="Connections" Type="2" Sorted="true">
       <Items>
         <ConnectionNode Name="DESKTOP-UVV3SE0:DESKTOP-UVV3SE0\Mahmoud">
-          <Created>2025-01-16T06:58:48.3973425+02:00</Created>
+          <Created>2025-01-18T00:28:46.499143+02:00</Created>
           <Type>SQL</Type>
           <Server>DESKTOP-UVV3SE0</Server>
-          <UserName />
-          <Authentication>Windows Authentication</Authentication>
-          <InitialDB />
-          <LoginTimeout>30</LoginTimeout>
-          <TrustServerCertificate>True</TrustServerCertificate>
-          <HostNameInServerCertificate />
-          <EncryptionOption>True</EncryptionOption>
-          <ExecutionTimeout>0</ExecutionTimeout>
-          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
-          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
-        </ConnectionNode>
-        <ConnectionNode Name="sql.bsite.net\MSSQL2016:examinationsystem_SampleDB">
-          <Created>2025-01-13T14:07:16.3118765+02:00</Created>
-          <Type>SQL</Type>
-          <Server>sql.bsite.net\MSSQL2016</Server>
-          <UserName>examinationsystem_SampleDB</UserName>
-          <Authentication>SQL</Authentication>
-          <InitialDB>examinationsystem_SampleDB</InitialDB>
-          <LoginTimeout>30</LoginTimeout>
-          <TrustServerCertificate>True</TrustServerCertificate>
-          <HostNameInServerCertificate />
-          <EncryptionOption>True</EncryptionOption>
-          <ExecutionTimeout>0</ExecutionTimeout>
-          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
-          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
-        </ConnectionNode>
-        <ConnectionNode Name="ZEZOTAHA\SQLEXPRESS:DESKTOP-UVV3SE0\Mahmoud">
-          <Created>2025-01-15T17:17:03.1123873+02:00</Created>
-          <Type>SQL</Type>
-          <Server>ZEZOTAHA\SQLEXPRESS</Server>
           <UserName />
           <Authentication>Windows Authentication</Authentication>
           <InitialDB />
@@ -52,64 +22,70 @@
     </LogicalFolder>
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
+        <FileNode Name="CLR.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>CLR.sql</FullPath>
+        </FileNode>
+        <FileNode Name="CreateBDTIProcedure.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>CreateBDTIProcedure.sql</FullPath>
+        </FileNode>
         <FileNode Name="CreateDatabase.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
           <FullPath>CreateDatabase.sql</FullPath>
         </FileNode>
         <FileNode Name="Insert.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-UVV3SE0:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-UVV3SE0</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>Insert.sql</FullPath>
         </FileNode>
         <FileNode Name="CreatePersonSchema.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-UVV3SE0:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-UVV3SE0</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>CreatePersonSchema.sql</FullPath>
         </FileNode>
         <FileNode Name="CreateSomeTablesByZezo.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
           <FullPath>CreateSomeTablesByZezo.sql</FullPath>
         </FileNode>
         <FileNode Name="DDL.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
           <FullPath>DDL.sql</FullPath>
         </FileNode>
-        <FileNode Name="SQLQuery2.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-UVV3SE0:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-UVV3SE0</AssociatedConnSrvName>
-          <AssociatedConnUserName />
-          <FullPath>SQLQuery2.sql</FullPath>
-        </FileNode>
         <FileNode Name="STUDENT_BDIT_STUDENT_INSTRUCTOR_COURSE.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
           <FullPath>STUDENT_BDIT_STUDENT_INSTRUCTOR_COURSE.sql</FullPath>
         </FileNode>
         <FileNode Name="CreateOrganizationSchema.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
           <FullPath>CreateOrganizationSchema.sql</FullPath>
         </FileNode>
         <FileNode Name="CreateExamSchema.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
           <FullPath>CreateExamSchema.sql</FullPath>
         </FileNode>
         <FileNode Name="CreateAnswerSchema.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
           <FullPath>CreateAnswerSchema.sql</FullPath>
         </FileNode>
         <FileNode Name="Views.sql">
@@ -117,6 +93,18 @@
           <AssociatedConnSrvName>DESKTOP-UVV3SE0</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>Views.sql</FullPath>
+        </FileNode>
+        <FileNode Name="insertionProcedure.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>insertionProcedure.sql</FullPath>
+        </FileNode>
+        <FileNode Name="zezo_insert.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>zezo_insert.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
