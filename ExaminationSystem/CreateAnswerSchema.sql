@@ -7,7 +7,7 @@ CREATE SCHEMA Answer;
 GO
 
 CREATE TABLE Answer.Student_Answer (
-    Id INT,
+    Id INT IDENTITY,
     Student_SSN CHAR(14) NOT NULL,
     Exam_Question_Id INT NOT NULL,
     Answer_Degree INT,

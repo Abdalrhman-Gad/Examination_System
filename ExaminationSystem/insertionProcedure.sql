@@ -280,7 +280,8 @@ BEGIN
         -- Check if the total degree exceeds max degree for the course
         IF ((@Num_Choose_Questions * @Choose_Question_Degree) + 
             (@Num_True_False_Questions * @True_False_Question_Degree) + 
-            (@Num_Text_Questions * @Text_Question_Degree)) > 
+            (@Num_Text_Questions * @Text_Question_Degree) +
+			(SELECT [Total_Exam_Degree] FROM [Exam].[Exams] WHERE [Id] = @Exam_Id)) > 
             (SELECT [Max_Degree] FROM [Organization].[Course] WHERE Code = @Course_Code)
         BEGIN
             PRINT 'You have exceeded the maximum degree allowed for the course.';
@@ -294,7 +295,8 @@ BEGIN
         INSERT INTO Exam.Exam_Questions (Exam_Id, Question_Id, Degree)
         SELECT TOP (@Num_Choose_Questions) @Exam_Id, Q.Id, @Choose_Question_Degree
         FROM Exam.Questions Q
-        WHERE Q.Instructor_Course_Id IN (SELECT id FROM [Organization].[Instructor_Course] WHERE [Course_Code] = @Course_Code)
+        WHERE Q.Instructor_Course_Id IN (SELECT id FROM [Organization].[Instructor_Course] WHERE [Course_Code] = @Course_Code) 
+		AND Q.Id NOT IN (SELECT Q.Id FROM[Exam].[Exam_Questions] WHERE Exam_Id = @Exam_Id)
         AND Q.Type = 'CHOOSE'
         ORDER BY NEWID();
 
@@ -303,6 +305,7 @@ BEGIN
         SELECT TOP (@Num_True_False_Questions) @Exam_Id, Q.Id, @True_False_Question_Degree
         FROM Exam.Questions Q
         WHERE Q.Instructor_Course_Id IN (SELECT id FROM [Organization].[Instructor_Course] WHERE [Course_Code] = @Course_Code)
+		AND Q.Id NOT IN (SELECT Q.Id FROM[Exam].[Exam_Questions] WHERE Exam_Id = @Exam_Id)
         AND Q.Type = 'TRUE OR FALSE'
         ORDER BY NEWID();
 
@@ -311,6 +314,7 @@ BEGIN
         SELECT TOP (@Num_Text_Questions) @Exam_Id, Q.Id, @Text_Question_Degree
         FROM Exam.Questions Q
         WHERE Q.Instructor_Course_Id IN (SELECT id FROM [Organization].[Instructor_Course] WHERE [Course_Code] = @Course_Code)
+		AND Q.Id NOT IN (SELECT Q.Id FROM[Exam].[Exam_Questions] WHERE Exam_Id = @Exam_Id)
         AND Q.Type = 'TEXT'
         ORDER BY NEWID();
 
