@@ -32,7 +32,6 @@ END
 
 
 ----trigger to prevent add Question of Type not Trueand false
-
 CREATE  or alter TRIGGER Exam.T_Insert_Q_T_F
 ON [Exam].[True_False]
 AFTER  INSERT 
@@ -75,7 +74,6 @@ END CATCH
 END;
 
 ----trigger to prevent add Question of Type not TEXT
-
 CREATE  or alter TRIGGER Exam.T_Insert_Q_TEXT         
 ON [Exam].[Text_Answers]
 AFTER  INSERT 
@@ -91,8 +89,8 @@ BEGIN CATCH
 		ROLLBACK;
 END CATCH
 END
-----dddddddddd-
 
+<<<<<<< HEAD
 CREATE OR ALTER TRIGGER [Answer].Clac_Student_Answer_Degree_TEXT
 ON[Answer].[Text_Answer]
 AFTER INSERT, UPDATE, DELETE
@@ -160,3 +158,29 @@ BEGIN
 	SET [Answer_Degree] = @Degree
 	WHERE [Id] = @Answer_Id;
 END
+=======
+
+
+--------------update result--------
+
+SELECT * FROM Answer.Student_Answer
+
+CREATE OR ALTER TRIGGER T_Update_Result
+on [Answer].[Student_Answer] 
+AFTER INSERT ,UPDATE 
+AS
+BEGIN
+  DECLARE  @Student_SSN CHAR(14) ;
+  DECLARE  @Answer_Degree INT ;
+  DECLARE  @Exam_Question_Id INT ;
+
+  (SELECT @Student_SSN=Student_SSN, @Answer_Degree=Answer_Degree ,@Exam_Question_Id=Exam_Question_Id FROM inserted)
+  UPDATE [Exam].[Student_Exams] 
+  SET Result+=@Answer_Degree
+  where  Exam_Id=@Exam_Question_Id and Student_SSN=@Student_SSN
+END;
+
+---dd--
+select * from [Answer].[Student_Answer]
+select * from [Exam].[Student_Exams]
+>>>>>>> Amr_branch
