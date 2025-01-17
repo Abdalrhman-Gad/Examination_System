@@ -11,6 +11,7 @@ CREATE TABLE Exam.Exams (
 	[Total_Time] AS DATEDIFF(MINUTE, [Start_Time], [End_Time]) PERSISTED,
 	[Allowances] NVARCHAR(150),
 	[Branch_Department_Track_Intake_Course_Instructor_Id] INT NOT NULL,
+	Total_Exam_Degree INT NOT NULL CONSTRAINT DF_Exam_Total_Exam_Degree DEFAULT 0 ,
 	CONSTRAINT PK_Exams_Id PRIMARY KEY ([Id]),
 
 	CONSTRAINT FK_Exams_Branch_Department_Track_Intake_Course_Instructor_Id 
