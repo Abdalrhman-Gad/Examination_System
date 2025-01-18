@@ -116,7 +116,7 @@ SELECT * FROM Organization.V_Student_Eaxm
 
 
 CREATE OR ALTER VIEW Exam.V_Exam_Questions
-(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Q_Id,Q_Text,
+(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Total_Exam_Degree,Q_Id,Q_Text,
 Created_At,Type,Ins_Cou_Id)
 WITH ENCRYPTION
 AS
@@ -130,7 +130,7 @@ AS
 SELECT * FROM Exam.V_Exam_Questions
 
 CREATE OR ALTER VIEW Exam.V_Exam_Questions_Choices
-(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Q_Id,Q_Text,
+(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Total_Exam_Degree,Q_Id,Q_Text,
 Created_At,Type,Ins_Cou_Id,C_Id,C_Q_Id,C_Text,C_Is_True)
 WITH ENCRYPTION
 AS
@@ -146,7 +146,7 @@ AS
 SELECT * FROM Exam.V_Exam_Questions_Choices
 
 CREATE OR ALTER VIEW Exam.V_Exam_Questions_T_F
-(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Q_Id,Q_Text,
+(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Total_Exam_Degree,Q_Id,Q_Text,
 Created_At,Type,Ins_Cou_Id,TF_Q_Id,TF_Is_True)
 WITH ENCRYPTION
 AS
@@ -162,7 +162,7 @@ AS
 SELECT * FROM Exam.V_Exam_Questions_T_F
 
 CREATE OR ALTER VIEW Exam.V_Exam_Questions_Text
-(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Q_Id,Q_Text,
+(E_Id,S_Time,E_Time,T_Time,Allowence,BDTICI,Total_Exam_Degree,Q_Id,Q_Text,
 Created_At,Type,Ins_Cou_Id,TEXT_Q_Id,Text_Answer)
 WITH ENCRYPTION
 AS
@@ -176,7 +176,7 @@ AS
 	ON TA.Question_Id=Q.Id
 
 
-SELECT * FROM Exam.V_Exam_Questions_T_F
+SELECT * FROM Exam.V_Exam_Questions_Text
 
 CREATE VIEW Answer.V_Student_Answer
 WITH ENCRYPTION 

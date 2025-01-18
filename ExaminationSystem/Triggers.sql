@@ -163,27 +163,26 @@ END
 
 
 --------------update result--------
-
 SELECT * FROM Answer.Student_Answer
+DROP TRIGGER dbo.T_Update_Result
 
-CREATE OR ALTER TRIGGER T_Update_Result
+CREATE OR ALTER TRIGGER [Answer].T_Update_Result
 on [Answer].[Student_Answer] 
-AFTER INSERT ,UPDATE 
+AFTER INSERT ,UPDATE ,DELETE
 AS
 BEGIN
   DECLARE  @Student_SSN CHAR(14) ;
   DECLARE  @Answer_Degree INT ;
   DECLARE  @Exam_Question_Id INT ;
 
-  (SELECT @Student_SSN=Student_SSN, @Answer_Degree=Answer_Degree ,@Exam_Question_Id=Exam_Question_Id FROM inserted)
-  UPDATE [Exam].[Student_Exams] 
-  SET Result+=@Answer_Degree
-  where  Exam_Id=@Exam_Question_Id and Student_SSN=@Student_SSN
-END;
+  SELECT @Student_SSN=Student_SSN, @Answer_Degree=Answer_Degree ,@Exam_Question_Id=Exam_Question_Id FROM inserted
 
----dd--
-select * from [Answer].[Student_Answer]
-select * from [Exam].[Student_Exams]
+  UPDATE ST
+        SET St.Result = ST.Result + (ISNULL(i.Answer_Degree,0) - ISNULL(d.Answer_Degree,0))
+        FROM [Exam].[Student_Exams]  ST
+        JOIN inserted i ON ST.Id= i.Exam_Question_Id
+        JOIN deleted d ON ST.Id = d.Exam_Question_Id AND i.Id= d.Id; 
+END;
 ---------------------
 --TRIGGER TO INSERT STUDENT ANSWER IN EXAM DATE AND TIME
 CREATE OR ALTER TRIGGER Check_Student_Answer_Time
