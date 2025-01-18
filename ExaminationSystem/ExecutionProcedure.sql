@@ -46,4 +46,39 @@ EXEC [addQuestionChoices] 'quest choice','40001234567891','Data Structures'
 
 EXEC addQuestionText @question='Where did you go?',@answer= 'Aswan',@instructor_id='40001234567899',@course_name='Software Engineering';
 
-		      
+
+
+----------------------------
+-- Execute the procedure, passing the input parameter and capturing the output
+DECLARE @ResultValue FLOAT;
+EXEC CalculateStudentAnswersResults 
+    @Student_Answer_Id = 1,
+    @Result = @ResultValue OUTPUT; -- Capture the output
+PRINT 'The calculated result is: ' + CAST(@ResultValue AS NVARCHAR(50));
+
+
+--Insert Branch
+EXEC [Organization].[Insert_Branch] 'Aswan','Aswan'
+
+
+               --Insert Department
+EXEC [Organization].[Insert_Department] 'Graphic', 'Graphic Design';
+
+               --Insert Track
+EXEC [Organization].[Insert_Track] '3D Gaming', 'Track for Gaming ';
+
+
+               --Insert Intake
+EXEC [Organization].[Insert_Intake] 'INTK2024-4', 2024, 2;
+
+
+               --Insert Department into Branch
+EXEC [Organization].[Insert_Branch_Department] 'Aswan','Graphic'
+  
+
+               --INSERT BRANCH DEPARTMENT TRACK
+EXEC [Organization].[Insert_Branch_Department_Track] 'Aswan','Graphic','3D Gaming'
+
+               --Insert Branch Department Track into Intake
+                
+EXEC [Organization].[Insert_Branch_Department_Track_Intake] 10,'INTK2024-3'

@@ -332,3 +332,117 @@ BEGIN
         THROW;
     END CATCH;
 END;
+
+
+CREATE PROCEDURE Exam.InsertExam
+    @Start_Time DATETIME,
+    @End_Time DATETIME,
+    @Allowances NVARCHAR(150),
+    @Branch_Department_Track_Intake_Course_Instructor_Id INT,
+    @Total_Exam_Degree INT = 0
+AS
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        -- Validate inputs
+        IF (@Start_Time >= @End_Time)
+        BEGIN
+            THROW 50000, 'Start_Time must be earlier than End_Time.', 1;
+        END
+
+        -- Insert data into the Exams table
+        INSERT INTO Exam.Exams (
+            Start_Time, 
+            End_Time, 
+            Allowances, 
+            Branch_Department_Track_Intake_Course_Instructor_Id, 
+            Total_Exam_Degree
+        )
+        VALUES (
+            @Start_Time, 
+            @End_Time, 
+            @Allowances, 
+            @Branch_Department_Track_Intake_Course_Instructor_Id, 
+            @Total_Exam_Degree
+        );
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        -- Rethrow the error for debugging purposes
+        THROW;
+    END CATCH
+END
+
+
+---------------------------------
+-- Procedure to insert into Student_Answer with error handling
+CREATE PROCEDURE Answer.Insert_Student_Answer
+    @Student_SSN CHAR(14),
+    @Exam_Question_Id INT,
+    @Answer_Degree INT = NULL
+AS
+BEGIN
+    BEGIN TRY
+        INSERT INTO Answer.Student_Answer (Student_SSN, Exam_Question_Id, Answer_Degree)
+        VALUES (@Student_SSN, @Exam_Question_Id, @Answer_Degree);
+    END TRY
+    BEGIN CATCH
+        PRINT 'Error inserting into Student_Answer: ' + ERROR_MESSAGE();
+        THROW;
+    END CATCH
+END;
+GO
+
+-- Procedure to insert into Text_Answer with error handling
+CREATE PROCEDURE Answer.Insert_Text_Answer
+    @Answer_Id INT,
+    @Student_Answer_Text NVARCHAR(255)
+AS
+BEGIN
+    BEGIN TRY
+        INSERT INTO Answer.Text_Answer (Answer_Id, Student_Answer_Text)
+        VALUES (@Answer_Id, @Student_Answer_Text);
+    END TRY
+    BEGIN CATCH
+        PRINT 'Error inserting into Text_Answer: ' + ERROR_MESSAGE();
+        THROW;
+    END CATCH
+END;
+GO
+
+-- Procedure to insert into True_False_Answer with error handling
+CREATE PROCEDURE Answer.Insert_True_False_Answer
+    @Answer_Id INT,
+    @Answer_Flag BIT
+AS
+BEGIN
+    BEGIN TRY
+        INSERT INTO Answer.True_False_Answer (Answer_Id, Answer_Flag)
+        VALUES (@Answer_Id, @Answer_Flag);
+    END TRY
+    BEGIN CATCH
+        PRINT 'Error inserting into True_False_Answer: ' + ERROR_MESSAGE();
+        THROW;
+    END CATCH
+END;
+GO
+
+-- Procedure to insert into Mcq_Answer with error handling
+CREATE PROCEDURE Answer.Insert_Mcq_Answer
+    @Answer_Id INT,
+    @Choice_Id INT
+AS
+BEGIN
+    BEGIN TRY
+        INSERT INTO Answer.Mcq_Answer (Answer_Id, Choice_Id)
+        VALUES (@Answer_Id, @Choice_Id);
+    END TRY
+    BEGIN CATCH
+        PRINT 'Error inserting into Mcq_Answer: ' + ERROR_MESSAGE();
+        THROW;
+    END CATCH
+END;
+GO
