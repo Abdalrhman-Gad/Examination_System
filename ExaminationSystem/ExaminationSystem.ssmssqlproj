@@ -64,12 +64,6 @@
           <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
           <FullPath>CreateDatabase.sql</FullPath>
         </FileNode>
-        <FileNode Name="Insert.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
-          <FullPath>Insert.sql</FullPath>
-        </FileNode>
         <FileNode Name="CreatePersonSchema.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
@@ -81,18 +75,6 @@
           <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
           <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
           <FullPath>CreateSomeTablesByZezo.sql</FullPath>
-        </FileNode>
-        <FileNode Name="DDL.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
-          <FullPath>DDL.sql</FullPath>
-        </FileNode>
-        <FileNode Name="STUDENT_BDIT_STUDENT_INSTRUCTOR_COURSE.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>sql.bsite.net\MSSQL2016</AssociatedConnSrvName>
-          <AssociatedConnUserName>examinationsystem_SampleDB</AssociatedConnUserName>
-          <FullPath>STUDENT_BDIT_STUDENT_INSTRUCTOR_COURSE.sql</FullPath>
         </FileNode>
         <FileNode Name="CreateOrganizationSchema.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:sql.bsite.net\MSSQL2016:False:examinationsystem_SampleDB</AssociatedConnectionMoniker>
@@ -112,6 +94,18 @@
           <AssociatedConnUserName />
           <FullPath>CreateAnswerSchema.sql</FullPath>
         </FileNode>
+        <FileNode Name="ExecutionView.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ZEZOTAHA\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>ZEZOTAHA\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>ExecutionView.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Triggers.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ZEZOTAHA\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>ZEZOTAHA\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>Triggers.sql</FullPath>
+        </FileNode>
         <FileNode Name="Views.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local):True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>(local)</AssociatedConnSrvName>
@@ -119,8 +113,8 @@
           <FullPath>Views.sql</FullPath>
         </FileNode>
         <FileNode Name="insertionProcedure.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local):True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>(local)</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ZEZOTAHA\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>ZEZOTAHA\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>insertionProcedure.sql</FullPath>
         </FileNode>
