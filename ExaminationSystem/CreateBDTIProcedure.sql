@@ -1,3 +1,5 @@
+USE[ExaminationSystemDB]
+GO
 --PROCEDURE TO INSERT BRANCH
 CREATE PROC [Organization].[Insert_Branch]
 	@Name NVARCHAR(50),
@@ -283,7 +285,7 @@ BEGIN
         -- Validate Instructor SSN
         IF NOT EXISTS (
             SELECT 1
-            FROM Parson.Instructor AS I
+            FROM Person.Instructor AS I
             WHERE I.SSN = @Instructor_SSN
         )
         BEGIN
@@ -368,7 +370,7 @@ BEGIN
 		BDTI.Branch_Department_Track_Id=@Branch_Department_Track_ID and BDTI.Intake_Id=@Intake_ID
 		
 		SELECT @Student_SSN_=Student.SSN
-		FROM Parson.Student
+		FROM Person.Student
 		WHERE Student.SSN=@student_SSN
 	
 		  IF (@Student_SSN_ IS NOT NULL AND @Branch_Department_Track_Intake_ID IS NOT NULL)
@@ -575,3 +577,5 @@ BEGIN
         THROW 52004, @ErrorMessage, 1;
     END CATCH
 END
+
+

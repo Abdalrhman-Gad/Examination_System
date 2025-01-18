@@ -1,3 +1,5 @@
+USE [ExaminationSystemDB]
+GO
 -- VIEW TO SHOW ALL DATA ABOUT BRANCHES AND DEPARTMENTS
 SELECT * FROM Organization.V_Branch_Department;
 

@@ -158,9 +158,6 @@ BEGIN
 	SET [Answer_Degree] = @Degree
 	WHERE [Id] = @Answer_Id;
 END
-<<<<<<< HEAD
-=======
-
 
 --------------update result--------
 SELECT * FROM Answer.Student_Answer
