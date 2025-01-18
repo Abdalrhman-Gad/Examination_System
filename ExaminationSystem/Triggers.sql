@@ -176,26 +176,12 @@ BEGIN
   DECLARE  @Exam_Question_Id INT ;
 
   SELECT @Student_SSN=Student_SSN, @Answer_Degree=Answer_Degree ,@Exam_Question_Id=Exam_Question_Id FROM inserted
-   IF (UPDATE(Answer_Degree))
-    BEGIN
-        UPDATE ST
-        SET ST.Result = ST.Result - d.Answer_Degree
-        FROM [Exam].[Student_Exams] ST
-        JOIN deleted d ON ST.Id = d.Exam_Question_Id;
 
-        UPDATE ST
-       SET ST.Result = ST.Result + i.Answer_Degree
-        FROM [Exam].[Student_Exams] ST
-        JOIN inserted i ON ST.Id = i.Exam_Question_Id;
-	END
- ELSE
-  BEGIN
   UPDATE ST
         SET St.Result = ST.Result + (ISNULL(i.Answer_Degree,0) - ISNULL(d.Answer_Degree,0))
         FROM [Exam].[Student_Exams]  ST
         JOIN inserted i ON ST.Id= i.Exam_Question_Id
         JOIN deleted d ON ST.Id = d.Exam_Question_Id AND i.Id= d.Id; 
-  END
 END;
 ---------------------
 --TRIGGER TO INSERT STUDENT ANSWER IN EXAM DATE AND TIME

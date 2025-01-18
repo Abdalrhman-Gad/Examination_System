@@ -100,6 +100,12 @@
           <AssociatedConnUserName />
           <FullPath>CreateAnswerSchema.sql</FullPath>
         </FileNode>
+        <FileNode Name="ExecutionView.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ZEZOTAHA\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>ZEZOTAHA\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>ExecutionView.sql</FullPath>
+        </FileNode>
         <FileNode Name="Triggers.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ZEZOTAHA\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>ZEZOTAHA\SQLEXPRESS</AssociatedConnSrvName>
