@@ -12,8 +12,6 @@ FROM 'F:\iti\sql\project\clr\ClassLibrary2\bin\Debug\ClassLibrary2.dll'
 WITH PERMISSION_SET = UNSAFE;
 GO
 
-EXEC sp_configure 'clr enabled', 1;
-RECONFIGURE;
 
 
 CREATE FUNCTION GetMatchingValue(@Questions NVARCHAR(150), @Answers NVARCHAR(255), @StudentAnswers NVARCHAR(255))
@@ -22,4 +20,4 @@ EXTERNAL NAME ClassLibrary2.SimilarityService.GetMatchingValue;
 GO
 
 
-select dbo.GetMatchingValue('What is SQL?', 'It is Structured Query Language.', 'The SQL is Structured Query Language.')
+select dbo.GetMatchingValue('What is SQL?', 'It is Structured Query Language.', 'The SQL is Structured Query Language.')
