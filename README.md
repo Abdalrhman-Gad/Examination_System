@@ -26,10 +26,21 @@ The **Examination System Database** is a SQL Server-based project designed to ma
 ## Database Structure
 
 - **Entities**:
-  - **Courses**: Stores course details (name, description, max/min degree).
-  - **Instructors**: Manages instructor assignments.
-  - **Students**: Tracks student enrollments and personal information.
+- **Person Schema**
+  - **Instructor**: Manages instructor assignments.
+  - **Student**: Tracks student enrollments and personal information.
+- **Organization Schema**
+  - **Branch**: Store's branch informations.
+  - **Department**: Store's department information.
+  - **Track**: Stroes track informations.
+  - **Intake**: Stores intake informations.
+  - **Branch Department**: Stores branch ID and each department on it.
+  - **Branch Department Track**: Stores branch_department id and its track's id's.
+  - **Branch Department Track Intake**: Stores branch_department_track id and its intake's id's.
+  - 
+  - 
   - **Exams**: Stores exam definitions, scheduling, and results.
+  - 
   - **Questions**: Maintains a pool of different types of questions.
   - **Exam Attempts**: Records students' answers and calculated scores.
 ## Usage
