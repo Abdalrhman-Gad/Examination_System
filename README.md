@@ -25,17 +25,44 @@ The **Examination System Database** is a SQL Server-based project designed to ma
 
 ## Database Structure
 
-- **Entities**:
-  - **Courses**: Stores course details (name, description, max/min degree).
-  - **Instructors**: Manages instructor assignments.
-  - **Students**: Tracks student enrollments and personal information.
-  - **Exams**: Stores exam definitions, scheduling, and results.
-  - **Questions**: Maintains a pool of different types of questions.
-  - **Exam Attempts**: Records students' answers and calculated scores.
+**Entities:**  
+
+**Person Schema**  
+- **Instructor**: Manages instructor assignments.  
+- **Student**: Tracks student enrollments and personal details.  
+
+**Organization Schema**  
+- **Branch**: Stores branch information.  
+- **Department**: Stores department information.  
+- **Track**: Stores track information.  
+- **Intake**: Stores intake information.  
+- **Branch Department**: Represents a branch and its departments.  
+- **Branch Department Track**: Represents a department and its tracks within a branch.  
+- **Branch Department Track Intake**: Represents a track and its intakes within a branch department.  
+- **Branch Department Track Intake Instructor Course**: Stores intake details, associated courses, and assigned instructors.  
+- **Branch Department Track Intake Student**: Stores intake details and enrolled students.  
+- **Course**: Stores course information.  
+- **Instructor Course**: Stores course details and assigned instructors.  
+
+**Exam Schema**  
+- **Exam**: Stores exam details.  
+- **Question**: Maintains a pool of various question types.  
+- **Exam Question**: Links exams with their respective questions.  
+- **Student Exam**: Stores student exam records, including type (corrective or regular) and results.  
+- **Choice**: Stores multiple-choice options for MCQ-type questions.  
+- **True/False**: Stores the correct answer for True/False-type questions.  
+- **Text Answer**: Stores the correct answer for text-based questions.  
+
+**Answer Schema**  
+- **Student Answer**: Stores student responses to exam questions.  
+- **Text Answer**: Stores student responses for text-based questions.  
+- **True/False Answer**: Stores student responses for True/False questions.  
+- **MCQ Answer**: Stores student responses for multiple-choice questions.  
+
 ## Usage
 
 - **Admins**: Manage users and system-wide configurations.
-- **Training Managers**: Add students, manage courses, and assign tracks.
+- **Training Managers**: Add branch, department, track, intake, students, manage courses, and assign tracks.
 - **Instructors**: Create exams, assign questions, and evaluate responses.
 - **Students**: Take scheduled exams and view results.
 
