@@ -13,6 +13,7 @@ The **Examination System Database** is a SQL Server-based project designed to ma
 - **User Authentication**: Role-based access for admin, training managers, instructors, and students.
 - **Performance Optimization**: Uses indexes, constraints, and triggers for best performance.
 - **Automated Backup**: Ensures daily data backups for security.
+- **Common Language Runtime (CLR)**: Transforms C# code into Intermediate Language (IL), which is then executed by the SQL server, Which Calculate student text answer degree from Gemini.
 
 ## System Requirements
 
